@@ -39,7 +39,7 @@ gives the logs everytime calling the apis
 
 // Security middlewares:
 
-# Rate limiter to limit the np. of requests per user 
+# Rate limiter to limit the no. of requests per user 
 ->Always on the top after PORT 
 ->npm i express-rate-limiter
 then set the time:15minutes and no. of max requests as 100.
@@ -156,6 +156,26 @@ Think of them like "calculated fields" or "derived attributes". -->
 
 # creating controllers for route functionalities and routes for routes url
 
+//It is a higher order function with combination of async function using arrow function wrapped over catchAsync function for error handling(avoiding the try/catch call on every controller)
+<!-- export const createUserAccount = catchAsync(async (req ,res ,next)=>{
+    const {name, email, password, role='student'}= req.body;
+    //we will do validations globally
 
+    const existingUser= await User.findOne({email: email.toLowerCase()});
+
+    if(existingUser){
+        throw new ApiError('User already exists', 400);
+    }
+
+    const user= await User.create({
+        name,
+        email:email.toLowerCase(),
+        password,
+        role
+
+    })
+    await user.updateLastActive();
+    generateToken(res, user, 'Account created successfully')
+}) -->
 
 
